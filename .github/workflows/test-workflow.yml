@@ -1,0 +1,97 @@
+name: Test Data Generation Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  generate-test-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Random Number Generation
+        run: |
+          echo "Starting random number generation process..."
+          echo "Initializing random number generator..."
+          sleep 2
+          echo "Generator initialized with seed: $RANDOM"
+          sleep 1
+          echo "Beginning number sequence generation..."
+          for i in {1..10}; do
+            echo "Random number $i: $RANDOM"
+            sleep 0.2
+          done
+          echo "Random number generation complete!"
+      
+      - name: Random Text Output
+        run: |
+          echo "Preparing random text generator..."
+          sleep 1
+          echo "Loading word dictionary..."
+          sleep 2
+          echo "Dictionary loaded with 10 entries"
+          words=("apple" "banana" "cherry" "date" "elderberry" "fig" "grape" "honeydew" "kiwi" "lemon")
+          echo "Generating random text sequences..."
+          for i in {1..8}; do
+            random_index=$((RANDOM % ${#words[@]}))
+            echo "Random word $i: ${words[$random_index]}"
+            sleep 0.25
+          done
+          echo "Text generation process completed successfully"
+      
+      - name: System Information with Random Formatting
+        run: |
+          echo "Collecting system information..."
+          sleep 1
+          echo "System scan initiated..."
+          sleep 2
+          formats=("PLAIN" "JSON" "XML" "CSV")
+          format_index=$((RANDOM % ${#formats[@]}))
+          echo "Using output format: ${formats[$format_index]}"
+          sleep 1
+          echo "CPU Information: Intel(R) Xeon(R) CPU @ 2.20GHz"
+          echo "Memory: 7.8GB"
+          echo "Disk Space: 84.2GB"
+          echo "System Load: $((RANDOM % 100))%"
+          sleep 1
+          echo "System information collection completed"
+      
+      - name: Random File Operations
+        run: |
+          echo "Preparing file operation simulator..."
+          sleep 1
+          echo "Creating temporary test files..."
+          for i in {1..5}; do
+            echo "Creating test file $i..."
+            sleep 0.5
+          done
+          echo "Files created successfully"
+          operations=("read" "write" "append" "delete" "rename" "copy")
+          for i in {1..8}; do
+            op_index=$((RANDOM % ${#operations[@]}))
+            file_num=$((RANDOM % 5 + 1))
+            echo "Performing ${operations[$op_index]} operation on test file $file_num"
+            sleep 0.25
+          done
+          echo "File operations completed with $((RANDOM % 10)) warnings"
+      
+      - name: Random Calculations
+        run: |
+          echo "Initializing calculation module..."
+          sleep 1
+          echo "Setting up calculation parameters..."
+          sleep 2
+          echo "Parameters configured, beginning calculations..."
+          for i in {1..5}; do
+            num1=$((RANDOM % 100))
+            num2=$((RANDOM % 100))
+            sum=$((num1 + num2))
+            product=$((num1 * num2))
+            echo "Calculation $i: $num1 + $num2 = $sum"
+            echo "Calculation $i: $num1 * $num2 = $product"
+            sleep 0.5
+          done
+          echo "Calculations completed successfully"
